@@ -1,0 +1,18 @@
+server:
+  port: 8090
+spring:
+  application:
+    name: service-gateway
+  main:
+    web-application-type: reactive
+  cloud:
+    gateway:
+      routes:
+        - id: service_server
+          uri: http://localhost:8088
+          predicates:
+            - Path=/server/**
+        - id: service_client
+          uri: http://localhost:8089
+          predicates:
+            - Path=/client/**
